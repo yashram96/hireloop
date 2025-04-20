@@ -1,15 +1,11 @@
 <template>
-  <div>
-    <AppHeader />
-    <main>
-      <HeroSection />
-      <HowItWorksSection />
-      <FeaturesSection />
-      <PricingSection />
-      <EmailCaptureSection />
-    </main>
-    <AppFooter />
-  </div>
+  <main>
+    <HeroSection />
+    <HowItWorksSection />
+    <FeaturesSection />
+    <PricingSection />
+    <EmailCaptureSection />
+  </main>
 </template>
 
 <script setup>

@@ -15,6 +15,7 @@
     "@nuxtjs/tailwindcss": "^6.11.4",
     "nuxt-icon": "^0.6.9",
     "@vueuse/nuxt": "^10.9.0",
+    "@nuxtjs/color-mode": "^3.3.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "zxcvbn": "^4.4.2",
@@ -22,7 +23,10 @@
     "tailwindcss-animate": "^1.0.7",
     "@nuxtjs/supabase": "^1.1.6",
     "cookie": "0.7.2",
-    "@vueuse/core": "^10.9.0"
+    "@vueuse/core": "^10.9.0",
+    "@heroicons/vue": "^2.1.1",
+    "@vuepic/vue-datepicker": "^7.4.0",
+    "date-fns": "^3.3.1"
   },
   "resolutions": {
     "cookie": "0.7.2"

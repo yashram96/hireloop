@@ -11,17 +11,26 @@
       <div class="flex items-center gap-4">
         <!-- Login/Register buttons -->
         <div class="hidden md:flex items-center gap-4">
-          <NuxtLink 
+          <NuxtLink
+            v-if="!user"
             to="/auth/login"
             class="text-gray-700 dark:text-gray-300 hover:text-primary-600 transition-colors font-medium"
           >
             Sign in
           </NuxtLink>
-          <NuxtLink 
+          <NuxtLink
+            v-if="!user"
             to="/auth/register"
             class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2 rounded-lg font-medium transition-colors"
           >
             Sign up
+          </NuxtLink>
+          <NuxtLink
+            v-if="user"
+            to="/dashboard"
+            class="text-gray-700 dark:text-gray-300 hover:text-primary-600 transition-colors font-medium"
+          >
+            Dashboard
           </NuxtLink>
         </div>
 
@@ -86,6 +95,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { Bars3Icon, XMarkIcon, SunIcon, MoonIcon } from '@heroicons/vue/24/outline';
 import { useColorMode } from '#imports';
+const user = useSupabaseUser();
 
 const isMenuOpen = ref(false);
 const scrolled = ref(false);

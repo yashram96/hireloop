@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     url: process.env.NUXT_PUBLIC_SUPABASE_URL,
     key: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY,
     redirect: false,
-  runtimeConfig: {
+  }, runtimeConfig: {
     public: {
       apiBase: '',
       apiKey: ''
@@ -39,18 +39,25 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { 
-          hid: 'description', 
-          name: 'description', 
-          content: 'HireLoop applies to jobs for you every day — while you sleep.' 
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'HireLoop applies to jobs for you every day — while you sleep.'
         }
       ],
       link: [
-        { 
-          rel: 'stylesheet', 
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' 
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
         }
-      ]
+      ],
     }
+  },
+  css: [
+    '~/assets/css/main.css',
+    '@vuepic/vue-datepicker/dist/main.css'
+  ],
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
   }
 })
