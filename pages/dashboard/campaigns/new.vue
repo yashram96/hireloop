@@ -105,6 +105,15 @@
         </button>
       </div>
     </form>
+    
+    <!-- Preferences Modal -->
+    <CampaignPreferencesModal
+      v-if="showPreferences"
+      :show="showPreferences"
+      :campaign-id="newCampaignId"
+      @close="handlePreferencesComplete"
+      @save="handlePreferencesComplete"
+    />
   </div>
 </template>
 
@@ -112,6 +121,8 @@
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const router = useRouter()
+const showPreferences = ref(false)
+const newCampaignId = ref(null)
 
 const form = ref({
   title: '',
@@ -137,23 +148,31 @@ const createCampaign = async () => {
     loading.value = true
     error.value = null
 
-    const { error: err } = await supabase
+    const { data, error: err } = await supabase
       .from('campaigns')
       .insert([{
         ...form.value,
         user_id: user.value.id
       }])
+      .select()
+      .single()
 
     if (err) throw err
 
-    // Redirect to campaigns list
-    router.push('/dashboard/campaigns')
+    // Show preferences modal
+    newCampaignId.value = data.id
+    showPreferences.value = true
   } catch (err) {
     error.value = err.message
     console.error('Error creating campaign:', err)
   } finally {
     loading.value = false
   }
+}
+
+// Handle preferences completion
+const handlePreferencesComplete = () => {
+  router.push('/dashboard/campaigns')
 }
 
 definePageMeta({

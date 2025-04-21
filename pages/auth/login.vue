@@ -73,10 +73,10 @@ const loading = ref(false)
 const error = ref(null)
 
 // Handle user redirect only on client-side
-onMounted(() => {
+onMounted(async () => {
   // Check if user exists and redirect
   if (user.value) {
-    navigateTo('/dashboard')
+    await navigateTo('/dashboard')
   }
 })
 

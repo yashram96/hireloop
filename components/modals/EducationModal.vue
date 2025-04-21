@@ -190,7 +190,9 @@ const dateToMonthYear = (dateStr) => {
 // Convert month/year to date string
 const monthYearToDate = (month, year) => {
   if (month === null || year === null) return null
-  return new Date(year, month, 1).toISOString().split('T')[0]
+  // Create date at noon to avoid timezone issues
+  const date = new Date(year, month, 1, 12, 0, 0)
+  return date.toISOString().split('T')[0]
 }
 
 // Watch for changes in month/year selections and update form
@@ -247,10 +249,13 @@ const handleSubmit = async () => {
   try {
     loading.value = true
     error.value = null
-
-    const data = {
+    
+    // Ensure dates are properly formatted
+    const formData = {
       ...form.value,
-      user_id: user.value.id
+      user_id: user.value.id,
+      start_date: form.value.start_date ? monthYearToDate(startMonth.value, startYear.value) : null,
+      end_date: form.value.end_date ? monthYearToDate(endMonth.value, endYear.value) : null
     }
 
     let response
@@ -258,14 +263,14 @@ const handleSubmit = async () => {
       response = await getData(
         `/api/education/${props.education.id}`,
         'PUT',
-        data,
+        formData,
         { 'Content-Type': 'application/json' }
       )
     } else {
       response = await getData(
         '/api/education',
         'POST',
-        data,
+        formData,
         { 'Content-Type': 'application/json' }
       )
     }
